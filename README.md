@@ -30,7 +30,7 @@ For Database and authentication firebase is used.
 
 ### Deployment
 
-Frontend is deployed on **firebase**. /
+Frontend is deployed on **firebase**.   
 Backend is deployed on **heroku**.
 
 
