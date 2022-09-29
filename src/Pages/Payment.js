@@ -5,7 +5,7 @@ import '../App.css'
 import Cartitems from '../components/Cartitems'
 import { useStateValue } from '../context/StateProvider'
 import { CardElement ,useElements, useStripe } from '@stripe/react-stripe-js'
-import axios from '../axios';
+import axios from 'axios';
 import { db } from '../firebase'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { LoadingButton } from '@mui/lab';
@@ -15,29 +15,32 @@ const Payment = () => {
     const navigate= useNavigate()
     const [{deliveryAddress, user, basket},dispatch] = useStateValue();
     const [error, setError] = useState(null);
-    const [disabled, setDisabled] = useState(null);
+    const [disabled, setDisabled] = useState(true);
     const [processing, setProcessing] = useState("");
-    const [succeeded, setSucceeded] = useState(false);
     const [loading, setloading] = useState(false);
     const [clientSecret, setclientSecret] = useState(true);
 
 
     const getTotal = basket.reduce((amount, item) => amount + item.price,0).toFixed(2)
 
+    // baseURL: 'https://hidden-crag-02537.herokuapp.com/'
+// baseURL:'http://localhost:8000/'
 
     useEffect(() => {
         const getClientSecret = async () => {
-            // const response = await axios({
-            //     method:'post',
-            //     url:`/payment/create?total=${getTotal*100}`
-            // });
-            // console.log('awdawd',response)
+            // const response = await axios.post(`/payment/create?total=${getTotal*100}`);
+            // console.log('awdawd',response.data.clientSecret)
             // setclientSecret(response.data.clientSecret);
-            const response = await axios.post(`/create?total=${getTotal*100}`);
-            console.log('awdawd',response.data.clientSecret)
+            const response = await axios({
+                method: 'post',
+                url: `https://hidden-crag-02537.herokuapp.com/payment/create?total=${getTotal*100}`,
+                headers: {"Content-Type": "application/json"}
+              });
+            //   console.log('awdawd',response.data.clientSecret)
             setclientSecret(response.data.clientSecret);
-
         }
+        getClientSecret();
+        getClientSecret();
         getClientSecret();
     }, [basket, getTotal])
 
@@ -56,8 +59,7 @@ const Payment = () => {
         navigate('/')
     }
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        setProcessing(true);
+        event.preventDefault();       
         setloading(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -76,7 +78,6 @@ const Payment = () => {
             }).catch((e) => {
                 console.log(e)
             })
-            setSucceeded(true);
             setError(null);
             setProcessing(false);
             dispatch({
@@ -87,13 +88,17 @@ const Payment = () => {
     }
 
     const handleChange = event => {
-        setDisabled(event.empty);
+        setDisabled(!event.complete);
+        setProcessing(event.empty);
+        console.log(event)
         setError(event.error? event.error.message: '')
     }
   
     return (
+    <>
     <Box sx={{display:'flex', flexDirection:'column', flexWrap:'wrap'}}>
-        <Typography mt={7} variant='h5' align='center'>Checkout ({basket?.length} Items)</Typography>
+            <Typography mt={7} variant='h5' align='center'>Checkout ({basket?.length} Items)</Typography>
+            <Typography ml={2} variant='caption' sx={{color:'text.secondary', textAlign:'center'}}>(Enter 42424242..... in card detail and then click buy now to make a test transaction)</Typography>
         <Box sx={{backgroundColor:'white'}} mt={2}>
             <Stack direction='column' ml={3} >
                 <Stack direction='row' p={3} sx={{borderBottom:'1px solid Lightgray'}}>
@@ -134,7 +139,6 @@ const Payment = () => {
                         </Stack>
                         <Paper elevation={2} sx={{border:'1px solid silver', padding:'10%'}}>
                             <Typography><strong>Order Total: ${getTotal}</strong></Typography>
-                            {/* <Button fullWidth sx={{marginTop:'2%',}} color='secondary' variant='contained' onClick={handleSubmit} disabled={processing || disabled || succeeded}>{processing ? 'processing' : 'Buy now'}</Button> */}
                             <LoadingButton 
                               fullWidth 
                               loadingIndicator='Processing...' 
@@ -142,7 +146,7 @@ const Payment = () => {
                               color='secondary' 
                               variant='contained' 
                               onClick={handleSubmit} 
-                              disabled={!basketLength}               
+                              disabled={!basketLength || processing || disabled}               
                               loading={loading}
                             >
                               Buy now
@@ -153,12 +157,8 @@ const Payment = () => {
             </Stack>
         </Box>
     </Box>
+    </>
   )
 }
 
 export default Payment
-
-
-
-
-// processing || disabled || succeeded &
