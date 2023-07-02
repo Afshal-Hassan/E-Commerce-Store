@@ -45,18 +45,16 @@ function Messages() {
     const joinRoom = async () => {
 
 
-        if (localStorage.getItem("user")) {
-            const user = JSON.parse(localStorage.getItem("user"));
-            socket.emit("join-room", user.id);
-            // dispatch(getMessagesOfTwoUsers({
+
+        socket.emit("join-room", 1);
+        // dispatch(getMessagesOfTwoUsers({
 
 
-            //     userEmail1: senderAndReceiver.data.messageSender,
-            //     userEmail2: senderAndReceiver.data.messageReceiver
+        //     userEmail1: senderAndReceiver.data.messageSender,
+        //     userEmail2: senderAndReceiver.data.messageReceiver
 
 
-            // }))
-        }
+        // }))
 
 
     }
