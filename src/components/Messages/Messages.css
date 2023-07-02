@@ -1,0 +1,161 @@
+#messages-layout {
+  background: #ffffff !important;
+  width: 81% !important;
+  height: 99vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-top: 30px !important;
+}
+
+#message-receiver-heading-container {
+  background: #ffffff !important;
+  height: 65px !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding-left: 30px !important;
+  box-shadow: 3px 3px 5px 1.5px lightgray !important;
+}
+
+#message-receiver-image {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+}
+
+#message-receiver-name {
+  font-weight: 549 !important;
+  color: black !important;
+  font-family: Lato, Poppins, Muli, sans-serif;
+  font-size: 18px !important;
+  margin-left: 12.5px !important;
+  margin-bottom: 0px !important;
+}
+
+#message-receiver-name-and-active-status-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  box-sizing: border-box !important;
+}
+
+#message-receiver-name-and-active-status-container h6 {
+  margin-top: 5px !important;
+  color: gray !important;
+  font-weight: 400 !important;
+  margin-left: 12.5px !important;
+  font-size: 11.5px !important;
+}
+
+#messages-container {
+  width: 100% !important;
+  height: 82% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  padding-top: 40px !important;
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+  overflow-y: auto !important;
+  box-sizing: border-box !important;
+}
+
+#messages-input-container {
+  box-shadow: 3px 3px 5px 1.5px lightgray !important;
+  width: 100% !important;
+  height: 8% !important;
+}
+
+.outgoing-messages {
+  max-width: 250px !important;
+  min-height: fit-content !important;
+  background-color: #1877f2 !important;
+  position: relative !important;
+  border-radius: 15px !important;
+  padding-left: 51.5px !important;
+  padding-right: 51.5px !important;
+  padding-top: 13.5px !important;
+  padding-bottom: 13.5px !important;
+  margin-bottom: 34px !important;
+  font-family: "Fira Sans", sans-serif !important;
+  text-align: center !important;
+  font-size: 15px !important;
+  color: whitesmoke !important;
+}
+
+.outgoing-messages::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 15px !important;
+  height: 15px !important;
+
+  border-left: 0px !important;
+  border-top: 0px !important;
+  top: 100% !important;
+  left: 50% !important;
+  margin-left: -13px !important;
+  transform: rotate(45deg) !important;
+  margin-top: -7px !important;
+  background: #1877f2 !important;
+}
+
+.incoming-messages {
+  max-width: 250px !important;
+  min-height: fit-content !important;
+  background-color: #f2f3f5 !important;
+  color: black !important;
+  position: relative !important;
+  border-radius: 15px !important;
+  padding-left: 51.5px !important;
+  padding-right: 51.5px !important;
+  padding-top: 13.5px !important;
+  padding-bottom: 13.5px !important;
+  align-self: flex-start !important;
+  font-family: "Fira Sans", sans-serif !important;
+  text-align: center !important;
+  font-size: 15px !important;
+  margin-bottom: 34px !important;
+}
+
+.incoming-messages::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 15px !important;
+  height: 15px !important;
+
+  border-left: 0px !important;
+  border-top: 0px !important;
+  top: 100% !important;
+  left: 50% !important;
+  margin-left: -13px !important;
+  transform: rotate(45deg) !important;
+  margin-top: -7px !important;
+  background: #f2f3f5 !important;
+}
+
+#type-messages {
+  border: 1px solid white !important;
+
+  width: 88% !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  padding-left: 24px !important;
+  font-size: 15px !important;
+  margin: 0 !important;
+  border-radius: 24px !important;
+  background-color: #f2f3f5 !important;
+  font-family: "Fira Sans", sans-serif !important;
+  border: none !important;
+  outline: none !important;
+}
+
+#send-btn {
+  color: whitesmoke !important;
+  cursor: pointer !important;
+  border-radius: 100% !important;
+  padding: 10px !important;
+  background: #1877f2 !important ;
+  margin-left: 25px !important;
+}

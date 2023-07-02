@@ -85,50 +85,50 @@ export default function FinalNavbar() {
   const [searchValue, setsearchValue] = React.useState('');
 
   const handleOrders = () => {
-    if(user) {
-        navigate('/orders')
-        handleMobileMenuClose();
-        handleMenuClose();
+    if (user) {
+      navigate('/orders')
+      handleMobileMenuClose();
+      handleMenuClose();
     } else {
-        dispatch({
-            type: 'OPENLOGINDIALOG'
-        });
+      dispatch({
+        type: 'OPENLOGINDIALOG'
+      });
     }
   }
 
 
-const handleOpen = () => {
-  setAnchorEl(null)
-  setMobileMoreAnchorEl(null)
-  dispatch({
+  const handleOpen = () => {
+    setAnchorEl(null)
+    setMobileMoreAnchorEl(null)
+    dispatch({
       type: 'OPENLOGINDIALOG'
-  });
-  handleMenuClose();
-}
-const handleClose = () => {
-  dispatch({
+    });
+    handleMenuClose();
+  }
+  const handleClose = () => {
+    dispatch({
       type: 'CLOSELOGINDIALOG',
-  })
-}
+    })
+  }
 
-const handleAuthentication = () => {
-  if(user) {
+  const handleAuthentication = () => {
+    if (user) {
       setAnchorEl(null)
       setMobileMoreAnchorEl(null)
       auth.signOut();
       localStorage.removeItem("User")
       navigate('/')
+    }
   }
-}
 
 
-const handleSearchChange = (e) => {
-  setsearchValue(e.target.value);
-}
+  const handleSearchChange = (e) => {
+    setsearchValue(e.target.value);
+  }
 
-const handleSearchIconClick = () => {
-  window.find(searchValue);
-}
+  const handleSearchIconClick = () => {
+    window.find(searchValue);
+  }
 
 
 
@@ -142,78 +142,78 @@ const handleSearchIconClick = () => {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-        id="account-menu"
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
+      id="account-menu"
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+      onClick={handleClose}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: 'visible',
+          filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+          mt: 1.5,
+          '& .MuiAvatar-root': {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
           },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          '&:before': {
+            content: '""',
+            display: 'block',
+            position: 'absolute',
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: 'background.paper',
+            transform: 'translateY(-50%) rotate(45deg)',
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+      anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
-      <MenuItem onClick={handleOrders} sx={{color:'text.secondary'}}>
+      <MenuItem onClick={handleOrders} sx={{ color: 'text.secondary' }}>
         <IconButton
           size="large"
           aria-label="show orders"
           color="inherit"
         >
-            <HistoryToggleOffIcon />
+          <HistoryToggleOffIcon />
         </IconButton>
         <p>Your orders</p>
       </MenuItem>
       {
-        user ? 
-        <MenuItem 
-        onClick={handleAuthentication} 
-        sx={{color:'text.secondary'}}
-        >
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit" 
-        >
-          <LogoutIcon color='text.secondary' />
-        </IconButton>
-        <p>Logout</p>
-        </MenuItem>
-        : 
-        <MenuItem 
-        onClick={handleOpen}
-        sx={{color:'text.secondary'}}
-        >
-        <IconButton>
-          <LoginIcon color='text.secondary'/>
-        </IconButton>
-        <p>Sign In</p>
-        </MenuItem>
+        user ?
+          <MenuItem
+            onClick={handleAuthentication}
+            sx={{ color: 'text.secondary' }}
+          >
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <LogoutIcon color='text.secondary' />
+            </IconButton>
+            <p>Logout</p>
+          </MenuItem>
+          :
+          <MenuItem
+            onClick={handleOpen}
+            sx={{ color: 'text.secondary' }}
+          >
+            <IconButton>
+              <LoginIcon color='text.secondary' />
+            </IconButton>
+            <p>Sign In</p>
+          </MenuItem>
       }
-      
+
     </Menu>
   );
 
@@ -234,12 +234,12 @@ const handleSearchIconClick = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem 
-      onClick={() => {
-        navigate('/checkout')
-        handleMobileMenuClose();
-      }}
-      sx={{color:'text.secondary'}}
+      <MenuItem
+        onClick={() => {
+          navigate('/checkout')
+          handleMobileMenuClose();
+        }}
+        sx={{ color: 'text.secondary' }}
       >
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={basket?.length} color="error">
@@ -248,50 +248,50 @@ const handleSearchIconClick = () => {
         </IconButton>
         <p>Cart Items</p>
       </MenuItem>
-      <MenuItem onClick={handleOrders} sx={{color:'text.secondary'}}>
+      <MenuItem onClick={handleOrders} sx={{ color: 'text.secondary' }}>
         <IconButton
           size="large"
           aria-label="show orders"
           color="inherit"
         >
-            <HistoryToggleOffIcon />
+          <HistoryToggleOffIcon />
         </IconButton>
         <p>Your orders</p>
       </MenuItem>
       {
-        user ? 
-        <MenuItem 
-        onClick={handleAuthentication} 
-        sx={{color:'text.secondary'}}
-        >    
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit" 
-        >
-          <LogoutIcon color='text.secondary' />
-        </IconButton>
-        <p>Logout</p>  
-        </MenuItem>       
-        :        
-        <MenuItem 
-        onClick={handleOpen}
-        sx={{color:'text.secondary'}}
-        >
-        <IconButton>
-          <LoginIcon color='text.secondary'/>
-        </IconButton>
-        <p>Sign In</p>
-        </MenuItem>
+        user ?
+          <MenuItem
+            onClick={handleAuthentication}
+            sx={{ color: 'text.secondary' }}
+          >
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <LogoutIcon color='text.secondary' />
+            </IconButton>
+            <p>Logout</p>
+          </MenuItem>
+          :
+          <MenuItem
+            onClick={handleOpen}
+            sx={{ color: 'text.secondary' }}
+          >
+            <IconButton>
+              <LoginIcon color='text.secondary' />
+            </IconButton>
+            <p>Sign In</p>
+          </MenuItem>
       }
     </Menu>
   );
 
   return (
 
-    
+
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" color='secondary'>
         <Toolbar>
@@ -299,16 +299,16 @@ const handleSearchIconClick = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ marginLeft:{md:'4%', sm:'4%', xs:'7%'}, '&:hover':{cursor:'pointer'} }}
+            sx={{ marginLeft: { md: '4%', sm: '4%', xs: '7%' }, '&:hover': { cursor: 'pointer' } }}
             onClick={() => navigate('/')}
           >
-            Cleever
+            Test
           </Typography>
-          <Search sx={{ display: { xs: 'none', sm: 'flex' }}} >         
+          <Search sx={{ display: { xs: 'none', sm: 'flex' } }} >
             <Tooltip title='Search' arrow>
-            <IconButton onClick={handleSearchIconClick}>
-              <SearchIcon sx={{color:'white'}}/>
-            </IconButton>
+              <IconButton onClick={handleSearchIconClick}>
+                <SearchIcon sx={{ color: 'white' }} />
+              </IconButton>
             </Tooltip>
             <StyledInputBase
               placeholder="Search…"
@@ -317,60 +317,60 @@ const handleSearchIconClick = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{display:'flex'}}>
-          { user && 
-            <Box sx={{alignItems:'center', marginTop:'5%', display:{xs:'none', sm:'block'}}}>
-          <Typography variant='caption'>Hi, {user?.email}</Typography>
-          </Box>}
-          <Tooltip title='Cart' arrow>
-            <IconButton
-              size="large"
-              aria-label="show items in cart"
-              color="inherit"
-              onClick={() => navigate('/checkout')}         
-            >
-              <Badge badgeContent={basket?.length} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-            </Tooltip>
-            
-            {
-              user 
-              ? 
-              <Tooltip title='Your Account' arrow>
+          <Box sx={{ display: 'flex' }}>
+            {user &&
+              <Box sx={{ alignItems: 'center', marginTop: '5%', display: { xs: 'none', sm: 'block' } }}>
+                <Typography variant='caption'>Hi, {user?.email}</Typography>
+              </Box>}
+            <Tooltip title='Cart' arrow>
               <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-              sx={{ display: { xs: 'none', md: 'flex' } }}
-            >
-              <AccountCircle />
-            </IconButton>
+                size="large"
+                aria-label="show items in cart"
+                color="inherit"
+                onClick={() => navigate('/checkout')}
+              >
+                <Badge badgeContent={basket?.length} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
             </Tooltip>
-            :
-            <Button sx={{color:'white'}} onClick={handleOpen}>
-              Sign In
-            </Button>
+
+            {
+              user
+                ?
+                <Tooltip title='Your Account' arrow>
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                    color="inherit"
+                    sx={{ display: { xs: 'none', md: 'flex' } }}
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </Tooltip>
+                :
+                <Button sx={{ color: 'white' }} onClick={handleOpen}>
+                  Sign In
+                </Button>
 
             }
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <Tooltip title='more' arrow>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
             </Tooltip>
           </Box>
         </Toolbar>

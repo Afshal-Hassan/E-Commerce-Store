@@ -1,0 +1,5 @@
+#chat-layout {
+  background: #ffffff !important;
+  display: flex !important;
+  flex-direction: row !important;
+}
