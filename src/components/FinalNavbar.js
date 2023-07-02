@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -21,6 +22,7 @@ import Login from "./Login";
 import HistoryToggleOffIcon from "@mui/icons-material/HistoryToggleOff";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
+import LoginSeller from "./LoginSeller";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -76,8 +78,12 @@ export default function FinalNavbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
+
+  const [openSeller, setOpenSeller] = useState(false);
   ///MY FUNCTIONS
-  const [{ basket, open, user }, dispatch] = useStateValue();
+  const [{ basket, open }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [searchValue, setsearchValue] = React.useState("");
 
@@ -111,10 +117,22 @@ export default function FinalNavbar() {
     if (user) {
       setAnchorEl(null);
       setMobileMoreAnchorEl(null);
-      auth.signOut();
+      localStorage.setItem("user", null);
       localStorage.removeItem("User");
       navigate("/");
     }
+  };
+
+  const handleOpenSeller = () => {
+    setOpenSeller(true);
+    dispatch({
+      type: "OPENLOGINDIALOGSELLER",
+    });
+  };
+  const handleCloseSeller = () => {
+    dispatch({
+      type: "CLOSELOGINDIALOGSELLER",
+    });
   };
 
   const handleSearchChange = (e) => {
@@ -329,8 +347,8 @@ export default function FinalNavbar() {
                 </IconButton>
               </Tooltip>
             ) : (
-              <Button sx={{ color: "white" }} onClick={handleOpen}>
-                Sign In
+              <Button sx={{ color: "white" }} onClick={handleOpenSeller}>
+                Sign In Seller
               </Button>
             )}
           </Box>
@@ -352,7 +370,8 @@ export default function FinalNavbar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Login open={open} handleClose={handleClose} />
+      {/* <Login open={open} handleClose={handleClose} /> */}
+      <LoginSeller open={openSeller} handleClose={handleCloseSeller} />
     </Box>
   );
 }

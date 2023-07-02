@@ -48,7 +48,8 @@ const Login = ({ open, handleClose }) => {
         toast.success("Logging In", {
           position: toast.POSITION.TOP_RIGHT,
         });
-        navigate("/");
+        localStorage.setItem("user", JSON.stringify(response?.data));
+        navigate("/payment");
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message, {

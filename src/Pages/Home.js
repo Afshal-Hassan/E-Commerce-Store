@@ -12,21 +12,23 @@ const Home = () => {
   const getItem = () => {
     console.log("in get");
     axios
-      .get("https://fakestoreapi.com/products?limit=20&sort=desc")
+      .get("http://localhost:8000/products")
       .then((response) => {
         setdata(response?.data);
         console.log(response?.data);
         setloading(true);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-    console.log("in ");
-    axios
-      .get("http://localhost:8000/products")
-      .then((response) => {
-        console.log(response);
+        if (!response?.data?.length) {
+          axios
+            .get("https://fakestoreapi.com/products?limit=20&sort=desc")
+            .then((response) => {
+              setdata(response?.data);
+              console.log(response?.data);
+              setloading(true);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -34,7 +36,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log("in use effect");
     getItem();
   }, []);
 

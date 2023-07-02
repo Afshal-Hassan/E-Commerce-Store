@@ -14,11 +14,14 @@ import Orders from "./Pages/Orders";
 import FinalNavbar from "./components/FinalNavbar";
 import NotFound from "./components/NotFound";
 import CustomList from "./components/CustomList";
+import Chat from "./components/Chat/Chat";
 import SellerPortal from "./Pages/SellerPortal";
 // require('dotenv').config()
 
 // const promise = loadStripe('pk_test_51Lj1VASGZP3p3zAFtVcaROPwiUqDuCIEVwh3cFK8320PfdnsZtbY6gqIcfiixLNaSEYaklsIpdBoM6RREobVrw9B0014tcuE1j')
-const promise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`);
+const promise = loadStripe(
+  `pk_test_51Lj1VASGZP3p3zAFtVcaROPwiUqDuCIEVwh3cFK8320PfdnsZtbY6gqIcfiixLNaSEYaklsIpdBoM6RREobVrw9B0014tcuE1j`
+);
 
 function App() {
   const [, dispatch] = useStateValue();
@@ -49,20 +52,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route element={<Requireauth />}>
-            <Route
-              path="/payment"
-              element={
-                <Elements stripe={promise}>
-                  <Payment />
-                </Elements>
-              }
-              exact
-            />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/seller-portal" element={<SellerPortal />} />
-            <Route path="/chat" element={<Chat />} />
-          </Route>
+          <Route
+            path="/payment"
+            element={
+              <Elements stripe={promise}>
+                <Payment />
+              </Elements>
+            }
+            exact
+          />
+          <Route path="/orders" element={<Orders />} />
+          {/* <Route element={<Requireauth />}> */}
+          <Route path="/seller-portal" element={<SellerPortal />} />
+          <Route path="/chat" element={<Chat />} />
+          {/* </Route> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </SnackbarProvider>

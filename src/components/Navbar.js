@@ -56,7 +56,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
-  const [{ basket, open, user }, dispatch] = useStateValue();
+  const [{ basket, open }, dispatch] = useStateValue();
+  let user = localStorage.getItem("user");
+  user = JSON.parse(user);
   const navigate = useNavigate();
 
   const handleOpen = () => {
@@ -72,7 +74,7 @@ export default function Navbar() {
 
   const handleAuthentication = () => {
     if (user) {
-      auth.signOut();
+      localStorage.setItem("user", null);
     }
   };
   // const matches = useMediaQuery('(max-width:600px)');
