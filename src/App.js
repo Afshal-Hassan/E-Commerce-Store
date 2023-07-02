@@ -15,7 +15,6 @@ import FinalNavbar from './components/FinalNavbar';
 import NotFound from './components/NotFound';
 import CustomList from './components/CustomList';
 import SellerPortal from './Pages/SellerPortal';
-import Chat from "./components/Chat/Chat"
 // require('dotenv').config()
 
 
@@ -47,9 +46,9 @@ function App() {
 
   return (
     <>
-      {/* <FinalNavbar />
-      <SellerPortal /> */}
-      <Chat />
+      <FinalNavbar />
+      <SellerPortal />
+
 
       {/* <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
       <Routes>

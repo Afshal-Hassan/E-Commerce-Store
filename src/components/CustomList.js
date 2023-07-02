@@ -13,12 +13,24 @@ import UpdateIcon from '@mui/icons-material/Update';
 
 
 
-function CustomList() {
+function CustomList(props) {
 
 
 
     const [dense, setDense] = React.useState(false);
     const [secondary, setSecondary] = React.useState(false);
+
+
+
+
+
+    const showModal = () => {
+        props.setIsModalOpen(true);
+    };
+
+
+
+
 
 
 
@@ -48,7 +60,7 @@ function CustomList() {
                                 <IconButton edge="end" aria-label="delete">
                                     <DeleteIcon style={{ color: "red", marginRight: 5 }} />
                                 </IconButton>
-                                <IconButton edge="end" aria-label="delete">
+                                <IconButton edge="end" aria-label="delete" onClick={showModal}>
                                     <UpdateIcon style={{ color: "blue" }} />
                                 </IconButton>
                             </div>
