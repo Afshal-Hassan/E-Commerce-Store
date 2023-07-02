@@ -73,6 +73,7 @@ const Login = ({ open, handleClose }) => {
         toast.success(response?.data?.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
+        localStorage.setItem("user", JSON.stringify(response?.data));
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message, {

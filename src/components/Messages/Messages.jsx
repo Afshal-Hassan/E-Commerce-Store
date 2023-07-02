@@ -45,16 +45,17 @@ function Messages() {
     const joinRoom = async () => {
 
 
-        if (Object.keys(privateRoomOfUser.data).length != 0) {
-            socket.emit("join-room", privateRoomOfUser.data.id);
-            dispatch(getMessagesOfTwoUsers({
+        if (localStorage.getItem("user")) {
+            const user = JSON.parse(localStorage.getItem("user"));
+            socket.emit("join-room", user.id);
+            // dispatch(getMessagesOfTwoUsers({
 
 
-                userEmail1: senderAndReceiver.data.messageSender,
-                userEmail2: senderAndReceiver.data.messageReceiver
+            //     userEmail1: senderAndReceiver.data.messageSender,
+            //     userEmail2: senderAndReceiver.data.messageReceiver
 
 
-            }))
+            // }))
         }
 
 
