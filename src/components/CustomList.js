@@ -22,13 +22,14 @@ function CustomList(props) {
     props.setIsModalOpen(true);
   };
 
-  const generate = (element) => {
-    return [0, 1, 2].map((value) =>
-      React.cloneElement(element, {
-        key: value,
-      })
-    );
-  };
+  // const generate = (element) => {
+  //   return data?.map((index, value) =>
+  //     React.cloneElement(element, {
+  //       key: index,
+  //       value,
+  //     })
+  //   );
+  // };
 
   const getItem = () => {
     console.log("in get");
@@ -48,47 +49,53 @@ function CustomList(props) {
   }, []);
 
   return (
-    <Grid item xs={12} md={6} style={{ marginTop: 70, paddingLeft: 30 }}>
-      <Typography
-        sx={{ mt: 4, mb: 2 }}
-        style={{ color: "gray" }}
-        variant="h6"
-        component="div"
-      >
-        Product & Items
-      </Typography>
-      <List dense={dense}>
-        {generate(
-          <ListItem
-            secondaryAction={
-              <div>
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon style={{ color: "red", marginRight: 5 }} />
-                </IconButton>
-                <IconButton edge="end" aria-label="delete" onClick={showModal}>
-                  <UpdateIcon style={{ color: "blue" }} />
-                </IconButton>
-              </div>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <FolderIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Sample Product"
-              secondary={secondary ? "Secondary text" : null}
-            />
-            <ListItemText
-              style={{ color: "gray" }}
-              primary="12$"
-              secondary={secondary ? "Secondary text" : null}
-            />
-          </ListItem>
-        )}
-      </List>
-    </Grid>
+    <div>
+      <Grid item xs={12} md={6} style={{ marginTop: 70, paddingLeft: 30 }}>
+        <Typography
+          sx={{ mt: 4, mb: 2 }}
+          style={{ color: "gray" }}
+          variant="h6"
+          component="div"
+        >
+          Product & Items
+        </Typography>
+        <List dense={dense}>
+          {data?.map((item) => (
+            <ListItem
+              secondaryAction={
+                <div>
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon style={{ color: "red", marginRight: 5 }} />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={showModal}
+                  >
+                    <UpdateIcon style={{ color: "blue" }} />
+                  </IconButton>
+                </div>
+              }
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  <FolderIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={item?.name}
+                secondary={secondary ? "Secondary text" : null}
+              />
+              <ListItemText
+                style={{ color: "gray" }}
+                primary={`${item?.prices}$`}
+                secondary={secondary ? "Secondary text" : null}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+    </div>
   );
 }
 
