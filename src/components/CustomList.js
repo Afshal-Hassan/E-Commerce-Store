@@ -31,8 +31,9 @@ function CustomList(props) {
   //   );
   // };
 
+  const deleteItem = (item) => {};
+
   const getItem = () => {
-    console.log("in get");
     axios
       .get("http://localhost:8000/products")
       .then((response) => {
@@ -64,7 +65,13 @@ function CustomList(props) {
             <ListItem
               secondaryAction={
                 <div>
-                  <IconButton edge="end" aria-label="delete">
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => {
+                      deleteItem(item);
+                    }}
+                  >
                     <DeleteIcon style={{ color: "red", marginRight: 5 }} />
                   </IconButton>
                   <IconButton
